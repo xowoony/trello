@@ -4,7 +4,7 @@
 <br>
 <h2>Technologies Used</h2>
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/Typescript-61DAFB?style=flat&logo=Typescript&logoColor=#3178C6"/>
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=Typescript&logoColor=white"/>
 <br>
 
 
