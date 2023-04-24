@@ -9,6 +9,9 @@ export const hourSelector = selector({
   key: "hours",
   get: ({ get }) => {
     const minutes = get(minuteState);
-    return minutes/60;
+    return minutes / 60;
+  },
+  set: ({ set }, newValue) => {
+    console.log(newValue);
   },
 });
