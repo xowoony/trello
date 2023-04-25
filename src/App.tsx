@@ -1,5 +1,10 @@
+import { DragDropContext } from "react-beautiful-dnd";
+
 function App() {
-  return null;
+  const onDragEnd = () => {};
+  return <DragDropContext onDragEnd={onDragEnd}>
+    <span>하하</span>
+  </DragDropContext>;
 }
 
 export default App;
