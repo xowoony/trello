@@ -5,7 +5,8 @@ export const minuteState = atom({
   default: 0,
 });
 
-export const hourSelector = selector({
+// number를 적어주면 selector가 number를 받는다는 것을 알게됨
+export const hourSelector = selector<number>({
   key: "hours",
   get: ({ get }) => {
     const minutes = get(minuteState);

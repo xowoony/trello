@@ -1,6 +1,6 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState} from "recoil";
 import { hourSelector, minuteState } from "./atoms";
-import { useState } from "react";
+
 
 function App() {
   // useRecoilState는 atom의 값과 그 atom을 수정할 수 있는 함수를 줌
