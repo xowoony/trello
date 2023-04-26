@@ -31,7 +31,9 @@ const Card = styled.div`
   padding: 10px 10px;
 `;
 
-
+// toDo리스트를 가져야 하기 때문에 만들어 줌
+// 이 toDo리스트를 draggable로 만들어 볼 것이다.
+const toDos = ["a", "b", "c", "d", "e", "f"];
 
 function App() {
   const onDragEnd = () => {};
@@ -42,17 +44,19 @@ function App() {
           <Droppable droppableId="one">
             {(magic) => (
               <Board ref={magic.innerRef} {...magic.droppableProps}>
-                <Draggable draggableId="first" index={0}>
-                  {(magic) => (
-                    <Card
-                      ref={magic.innerRef}
-                      {...magic.draggableProps}
-                      {...magic.dragHandleProps}
-                    >
-                      one
-                    </Card>
-                  )}
-                </Draggable>
+                {toDos.map((toDo) => (
+                  <Draggable draggableId="first" index={0}>
+                    {(magic) => (
+                      <Card
+                        ref={magic.innerRef}
+                        {...magic.draggableProps}
+                        {...magic.dragHandleProps}
+                      >
+                        {toDo}
+                      </Card>
+                    )}
+                  </Draggable>
+                ))}
               </Board>
             )}
           </Droppable>
