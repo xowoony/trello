@@ -5,9 +5,6 @@ import { DefaultTheme } from "styled-components";
 // 작성해준 후 export 를 해준다.
 export const darkTheme: DefaultTheme = {
   bgColor: "rgb(107, 201, 251)",
-  boardColor:"#DADFE9",
-  cardColor: "white",
-}
-
-
-
+  boardColor: "rgb(255 255 255 / 34%)",
+  cardColor: "#ffffffb3",
+};

@@ -31,6 +31,8 @@ const Card = styled.div`
   padding: 10px 10px;
 `;
 
+
+
 function App() {
   const onDragEnd = () => {};
   return (
