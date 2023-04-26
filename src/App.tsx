@@ -27,6 +27,7 @@ const Board = styled.div`
 
 const Card = styled.div`
   border-radius: 5px;
+  margin-bottom: 5px;
   background-color: ${(props) => props.theme.cardColor};
   padding: 10px 10px;
 `;
@@ -44,8 +45,8 @@ function App() {
           <Droppable droppableId="one">
             {(magic) => (
               <Board ref={magic.innerRef} {...magic.droppableProps}>
-                {toDos.map((toDo) => (
-                  <Draggable draggableId="first" index={0}>
+                {toDos.map((toDo, index) => (
+                  <Draggable draggableId={toDo} index={index}>
                     {(magic) => (
                       <Card
                         ref={magic.innerRef}
@@ -57,6 +58,7 @@ function App() {
                     )}
                   </Draggable>
                 ))}
+                {magic.placeholder}
               </Board>
             )}
           </Droppable>
