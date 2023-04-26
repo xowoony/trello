@@ -1,5 +1,7 @@
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { toDoState } from "./atoms";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -32,11 +34,9 @@ const Card = styled.div`
   padding: 10px 10px;
 `;
 
-// toDo리스트를 가져야 하기 때문에 만들어 줌
-// 이 toDo리스트를 draggable로 만들어 볼 것이다.
-const toDos = ["a", "b", "c", "d", "e", "f"];
-
 function App() {
+ const [toDos, setToDos]  = useRecoilState(toDoState);
+
   const onDragEnd = () => {};
   return (
     <DragDropContext onDragEnd={onDragEnd}>
