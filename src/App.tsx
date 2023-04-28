@@ -35,9 +35,12 @@ const Card = styled.div`
 `;
 
 function App() {
- const [toDos, setToDos]  = useRecoilState(toDoState);
+  const [toDos, setToDos] = useRecoilState(toDoState);
+  // onDragEnd : 드래그가 끝났을 때 실행되는 함수
+  const onDragEnd = () => {
+    console.log("draggin finished!");
+  };
 
-  const onDragEnd = () => {};
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
@@ -46,7 +49,7 @@ function App() {
             {(magic) => (
               <Board ref={magic.innerRef} {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <Draggable draggableId={toDo} index={index}>
+                  <Draggable key={index} draggableId={toDo} index={index}>
                     {(magic) => (
                       <Card
                         ref={magic.innerRef}
