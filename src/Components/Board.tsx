@@ -5,9 +5,14 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   border-radius: 5px;
   background-color: ${(props) => props.theme.boardColor};
-  padding: 20px 10px;
-  padding-top: 30px;
+  padding: 0.7rem 1rem;
   min-height: 200px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 interface IBoardProps {
@@ -19,17 +24,20 @@ interface IBoardProps {
 // 이렇게 하면 재사용할 수 있는 board 컴포넌트가 생겼다.
 function Board({ toDos, boardId }: IBoardProps) {
   return (
-    <Droppable droppableId={boardId}>
-      {(magic) => (
-        // 앞으로 3가지 보드를 만들 것이다.
-        <Wrapper ref={magic.innerRef} {...magic.droppableProps}>
-          {toDos.map((toDo, index) => (
-            <DragabbleCard key={toDo} toDo={toDo} index={index} />
-          ))}
-          {magic.placeholder}
-        </Wrapper>
-      )}
-    </Droppable>
+    <Wrapper>
+      <Title>{boardId}</Title>
+      <Droppable droppableId={boardId}>
+        {(magic) => (
+          // 앞으로 3가지 보드를 만들 것이다.
+          <div ref={magic.innerRef} {...magic.droppableProps}>
+            {toDos.map((toDo, index) => (
+              <DragabbleCard key={toDo} toDo={toDo} index={index} />
+            ))}
+            {magic.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </Wrapper>
   );
 }
 
