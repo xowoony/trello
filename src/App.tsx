@@ -71,6 +71,7 @@ function App() {
         <Boards>
           <Droppable droppableId="one">
             {(magic) => (
+              // 앞으로 3가지 보드를 만들 것이다.
               <Board ref={magic.innerRef} {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
                  <DragabbleCard key={toDo} toDo={toDo} index={index} />

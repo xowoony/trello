@@ -1,3 +1,4 @@
+import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
@@ -13,7 +14,8 @@ interface IDragabbleCardProps {
   index: number;
 }
 
-function DragabbleCard({ toDo, index }:IDragabbleCardProps) {
+function DragabbleCard({ toDo, index }: IDragabbleCardProps) {
+  console.log(toDo, "렌더링 됨.");
   return (
     <Draggable key={toDo} draggableId={toDo} index={index}>
       {(magic) => (
@@ -29,4 +31,4 @@ function DragabbleCard({ toDo, index }:IDragabbleCardProps) {
   );
 }
 
-export default DragabbleCard;
+export default React.memo(DragabbleCard) ;
