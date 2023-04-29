@@ -1,4 +1,9 @@
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
@@ -37,8 +42,31 @@ const Card = styled.div`
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   // onDragEnd : 드래그가 끝났을 때 실행되는 함수
-  const onDragEnd = () => {
-    console.log("draggin finished!");
+  // destination : 드래그 끝나는 시점의 도착지 정보
+  // source : 드래그 시작 정보 - 움직임을 시작한 아이템의 index, droppableId를 알려줌
+  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
+    // 그자리에 그대로 놓아서 destination이 없는 경우 그대로 리턴 조치.
+    if (!destination) return;
+    // oldToDos 작성
+    setToDos((oldToDos) => {
+      // 모든 toDos를 변형시킬 수 없기 때문에 복사를 하겠음
+      const toDosCopy = [...oldToDos];
+
+      console.log("Delete item on : ", source.index);
+      console.log(toDosCopy);
+      // 1. source.index에서 아이템을 삭제한다.
+      toDosCopy.splice(source.index, 1); // source.index 즉 시작시점부터 1개만 지움
+
+      console.log("Delete item");
+      console.log(toDosCopy);
+      console.log("Put back", draggableId, "on", destination.index);
+      // 2. item을 다시 destination.index에 넣고, 아무것도 추가하지 않고 item을 넣는다.
+      // (item은 draggabledId 이다.)
+      // (때때로 destination이 없을 수도 있다. 유저가 그자리에 그대로 둘 경우엔)
+      toDosCopy.splice(destination?.index, 0, draggableId);
+      console.log(toDosCopy);
+      return toDosCopy;
+    });
   };
 
   return (
@@ -49,7 +77,10 @@ function App() {
             {(magic) => (
               <Board ref={magic.innerRef} {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <Draggable key={index} draggableId={toDo} index={index}>
+                  // 버그가 발생할 수 있음 - draggable의 key와 draggableId가 같아야 함
+                  // react.js에서 우리는 key를 숫자인 index로 주는 것에 익숙하지만
+                  // 이 경우에는 key는 draggableId와 무조건 같아야 한다.
+                  <Draggable key={toDo} draggableId={toDo} index={index}>
                     {(magic) => (
                       <Card
                         ref={magic.innerRef}
