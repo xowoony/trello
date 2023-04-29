@@ -13,14 +13,15 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   margin: 0 auto;
-  max-width: 470px;
+  max-width: 680px;
   width: 100%;
 `;
 
 const Boards = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
+  gap:10px;
 `;
 
 function App() {
