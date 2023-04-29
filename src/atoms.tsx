@@ -1,7 +1,20 @@
 import { atom } from "recoil";
 
-export const toDoState = atom({
+// interface를 하나 만든다
+interface IToDoState {
+  // 이 state는 string으로서의 property와, string array로 이루어져있다고 알려주겠음
+  [key: string]: string[];
+}
+
+export const toDoState = atom<IToDoState>({
   key: "toDo",
-  // default는 우리가 이미 가지고 있던 것을 쓰도록 하겠음.
-  default: ["a", "b", "c", "d", "e", "f"],
+  // default를 기존의 배열에서 -> object로 변경해준다.
+  default: {
+    // 이 to_do는 배열을 가진다.
+    to_do: ["a", "b"],
+    doing: ["c", "d", "e"],
+    done: ["f"],
+  },
 });
+
+// 유저에게 board를 만들 선택권을 줄 가능성이 있을 경우
