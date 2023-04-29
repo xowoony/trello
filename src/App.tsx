@@ -7,6 +7,7 @@ import {
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
+import DragabbleCard from "./Components/DragabbleCard";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -32,12 +33,7 @@ const Board = styled.div`
   min-height: 200px;
 `;
 
-const Card = styled.div`
-  border-radius: 5px;
-  margin-bottom: 5px;
-  background-color: ${(props) => props.theme.cardColor};
-  padding: 10px 10px;
-`;
+
 
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
@@ -77,20 +73,7 @@ function App() {
             {(magic) => (
               <Board ref={magic.innerRef} {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
-                  // 버그가 발생할 수 있음 - draggable의 key와 draggableId가 같아야 함
-                  // react.js에서 우리는 key를 숫자인 index로 주는 것에 익숙하지만
-                  // 이 경우에는 key는 draggableId와 무조건 같아야 한다.
-                  <Draggable key={toDo} draggableId={toDo} index={index}>
-                    {(magic) => (
-                      <Card
-                        ref={magic.innerRef}
-                        {...magic.draggableProps}
-                        {...magic.dragHandleProps}
-                      >
-                        {toDo}
-                      </Card>
-                    )}
-                  </Draggable>
+                 <DragabbleCard key={toDo} toDo={toDo} index={index} />
                 ))}
                 {magic.placeholder}
               </Board>
