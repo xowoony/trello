@@ -2,12 +2,13 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+// 각각의 toDo들
 const Card = styled.div`
   border-radius: 5px;
   margin-bottom: 5px;
   background-color: ${(props) => props.theme.cardColor};
   padding: 10px 10px;
-  min-width: 15rem;
+  min-width: 18rem;
 `;
 
 interface IDragabbleCardProps {
