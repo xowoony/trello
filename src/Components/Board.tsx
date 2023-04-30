@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.boardColor};
   padding: 0.7rem 1rem;
   min-height: 200px;
+  display: flex;
+  flex-direction: column;
   @media screen and (max-width: 1090px) {
     width: 20rem;
   }
@@ -19,6 +21,12 @@ const Title = styled.div`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 10px;
+`;
+
+// drop 이 허락되는 영역
+const Area = styled.div`
+  background-color: blue;
+  flex-grow: 1;
 `;
 
 interface IBoardProps {
@@ -33,15 +41,18 @@ function Board({ toDos, boardId }: IBoardProps) {
     <Wrapper>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-        {(magic) => (
+        {(magic, snapshot) => (
           // 앞으로 3가지 보드를 만들 것이다.
           // 우리가 드롭할 때 받는 역할을 하는 건 div 뿐임
-          <div style={{backgroundColor:"red"}} ref={magic.innerRef} {...magic.droppableProps}>
+          <Area
+            ref={magic.innerRef}
+            {...magic.droppableProps}
+          >
             {toDos.map((toDo, index) => (
               <DragabbleCard key={toDo} toDo={toDo} index={index} />
             ))}
             {magic.placeholder}
-          </div>
+          </Area>
         )}
       </Droppable>
     </Wrapper>
