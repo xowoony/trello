@@ -15,9 +15,10 @@ const Wrapper = styled.div`
 
 // TODO, Doing, Done 타이틀
 const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
 `;
 
 interface IBoardProps {
