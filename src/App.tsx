@@ -42,6 +42,9 @@ function App() {
   const onDragEnd = (info: DropResult) => {
     console.log(info);
     const { destination, draggableId, source } = info;
+    // destination이 정의되지 않았을 경우 그대로 리턴
+    if (!destination) return;
+    // ★ 같은 보드 내에서 재정렬하기 ★
     if (destination?.droppableId === source.droppableId) {
       setToDos((allBoards) => {
         // source의 droppableId로부터 array를 복사하는 과정
@@ -58,6 +61,26 @@ function App() {
         return {
           ...allBoards, // 다른 모든 board들을 가져오고
           [source.droppableId]: boardCopy, // 새로운 변형된 board. (복사본임)
+        };
+      });
+    }
+    // ★ 서로 다른 보드 넘나들어서 재정렬하기 ★
+    if (destination.droppableId !== source.droppableId) {
+      setToDos((allBoards) => {
+        // 1. Source board의 복사본을 만든다. - 시작지점
+        // (모든 보드를 가져와서 거기에서 source.droppableId를 복사)
+        const sourceBoard = [...allBoards[source.droppableId]];
+        // 2. destinationBoard 선언 - 끝나는 지점
+        const destinationBoard = [...allBoards[destination.droppableId]];
+        // 3. sourceboard 삭제하기
+        sourceBoard.splice(source.index, 1);
+        // 4. 삭제한걸 destination board에 넣어줌
+        // (draggableId를 움직임이 끝나는 board의 index에 넣어줌)
+        destinationBoard.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoards,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
         };
       });
     }

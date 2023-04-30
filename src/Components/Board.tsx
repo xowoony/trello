@@ -35,7 +35,8 @@ function Board({ toDos, boardId }: IBoardProps) {
       <Droppable droppableId={boardId}>
         {(magic) => (
           // 앞으로 3가지 보드를 만들 것이다.
-          <div ref={magic.innerRef} {...magic.droppableProps}>
+          // 우리가 드롭할 때 받는 역할을 하는 건 div 뿐임
+          <div style={{backgroundColor:"red"}} ref={magic.innerRef} {...magic.droppableProps}>
             {toDos.map((toDo, index) => (
               <DragabbleCard key={toDo} toDo={toDo} index={index} />
             ))}
