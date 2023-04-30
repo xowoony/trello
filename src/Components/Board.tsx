@@ -2,13 +2,18 @@ import { Droppable } from "react-beautiful-dnd";
 import DragabbleCard from "./DragabbleCard";
 import styled from "styled-components";
 
+// 보드
 const Wrapper = styled.div`
   border-radius: 5px;
   background-color: ${(props) => props.theme.boardColor};
   padding: 0.7rem 1rem;
   min-height: 200px;
+  @media screen and (max-width: 1090px) {
+    width: 20rem;
+  }
 `;
 
+// TODO, Doing, Done
 const Title = styled.div`
   display: flex;
   justify-content: center;

@@ -1,7 +1,4 @@
-import {
-  DragDropContext,
-  DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
@@ -15,13 +12,27 @@ const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 680px;
   width: 100%;
+
 `;
 
+// 보드 전체 컨테이너
 const Boards = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  gap:10px;
+  gap: 10px;
+
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media screen and (max-width: 1090px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 function App() {
@@ -33,7 +44,7 @@ function App() {
     // 그자리에 그대로 놓아서 destination이 없는 경우 그대로 리턴 조치.
     if (!destination) return;
     // oldToDos 작성
-   /*  setToDos((oldToDos) => {
+    /*  setToDos((oldToDos) => {
       // 모든 toDos를 변형시킬 수 없기 때문에 복사를 하겠음
       const toDosCopy = [...oldToDos];
       // 1. source.index에서 아이템을 삭제한다.
@@ -52,7 +63,11 @@ function App() {
       <Wrapper>
         {/* Object.keys(toDos) 까지 하면 board의 모든 Id를 받아왔음. */}
         {/* 그럼 그 boardId로 map을 이용해 새로운 board들을 만들어준다. */}
-        <Boards>{Object.keys(toDos).map((boardId) => <Board key={boardId} toDos={toDos[boardId]} boardId={boardId} />)}</Boards>
+        <Boards>
+          {Object.keys(toDos).map((boardId) => (
+            <Board key={boardId} toDos={toDos[boardId]} boardId={boardId} />
+          ))}
+        </Boards>
       </Wrapper>
     </DragDropContext>
   );

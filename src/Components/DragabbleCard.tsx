@@ -7,6 +7,7 @@ const Card = styled.div`
   margin-bottom: 5px;
   background-color: ${(props) => props.theme.cardColor};
   padding: 10px 10px;
+  min-width: 15rem;
 `;
 
 interface IDragabbleCardProps {
@@ -15,7 +16,6 @@ interface IDragabbleCardProps {
 }
 
 function DragabbleCard({ toDo, index }: IDragabbleCardProps) {
-  console.log(toDo, "렌더링 됨.");
   return (
     <Draggable key={toDo} draggableId={toDo} index={index}>
       {(magic) => (
