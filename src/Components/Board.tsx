@@ -38,6 +38,7 @@ const Area = styled.div<IAreaProps>`
   // 드래그해서 보드 위로 올라오는지 아닌지에 따라서 배경색을 바꾸어줌.
   background-color: ${(props) => (props.isDraggingOver ? "pink" : props.isDraggingFromThis ?"red" :"blue")};
   flex-grow: 1;
+  transition: background-color 0.3s ease-in-out;
 `;
 
 // boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
