@@ -2,6 +2,16 @@ import { Droppable } from "react-beautiful-dnd";
 import DragabbleCard from "./DragabbleCard";
 import styled from "styled-components";
 
+interface IBoardProps {
+  toDos: string[];
+  boardId: string;
+}
+
+interface IAreaProps {
+  isDraggingFromThis: boolean;
+  isDraggingOver: boolean;
+}
+
 // 보드
 const Wrapper = styled.div`
   border-radius: 5px;
@@ -24,15 +34,11 @@ const Title = styled.div`
 `;
 
 // drop 이 허락되는 영역
-const Area = styled.div`
-  background-color: blue;
+const Area = styled.div<IAreaProps>`
+  // 드래그해서 보드 위로 올라오는지 아닌지에 따라서 배경색을 바꾸어줌.
+  background-color: ${(props) => (props.isDraggingOver ? "pink" : props.isDraggingFromThis ?"red" :"blue")};
   flex-grow: 1;
 `;
-
-interface IBoardProps {
-  toDos: string[];
-  boardId: string;
-}
 
 // boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
 // 이렇게 하면 재사용할 수 있는 board 컴포넌트가 생겼다.
@@ -45,6 +51,8 @@ function Board({ toDos, boardId }: IBoardProps) {
           // 앞으로 3가지 보드를 만들 것이다.
           // 우리가 드롭할 때 받는 역할을 하는 건 div 뿐임
           <Area
+            isDraggingOver={snapshot.isDraggingOver}
+            isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
