@@ -48,12 +48,12 @@ function Board({ toDos, boardId }: IBoardProps) {
     <Wrapper>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-        {(magic, snapshot) => (
+        {(magic, info) => (
           // 앞으로 3가지 보드를 만들 것이다.
           // 우리가 드롭할 때 받는 역할을 하는 건 div 뿐임
           <Area
-            isDraggingOver={snapshot.isDraggingOver}
-            isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
+            isDraggingOver={info.isDraggingOver}
+            isDraggingFromThis={Boolean(info.draggingFromThisWith)}
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
