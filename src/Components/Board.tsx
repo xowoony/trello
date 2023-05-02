@@ -14,31 +14,39 @@ interface IAreaProps {
 
 // 보드
 const Wrapper = styled.div`
-  border-radius: 5px;
+  width: 300px;
+  padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
-  padding: 0.7rem 1rem;
-  min-height: 200px;
+  border-radius: 5px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 1090px) {
+  /* @media screen and (max-width: 1090px) {
     width: 20rem;
-  }
+  } */
 `;
 
 // TODO, Doing, Done 타이틀
-const Title = styled.div`
+const Title = styled.h2`
   text-align: center;
-  font-size: 16px;
   font-weight: 600;
   margin-bottom: 10px;
+  font-size: 16px;
 `;
 
 // drop 이 허락되는 영역
 const Area = styled.div<IAreaProps>`
   // 드래그해서 보드 위로 올라오는지 아닌지에 따라서 배경색을 바꾸어줌.
-  background-color: ${(props) => (props.isDraggingOver ? "pink" : props.isDraggingFromThis ?"red" :"blue")};
+  background-color: ${(props) =>
+    props.isDraggingOver
+      ? "#dfe6e9"
+      : props.isDraggingFromThis
+      ? "#b2bec3"
+      : "transparent"};
   flex-grow: 1;
+  min-width: 17rem;
   transition: background-color 0.3s ease-in-out;
+  padding: 20px;
 `;
 
 // boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
