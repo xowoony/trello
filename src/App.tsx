@@ -40,7 +40,6 @@ function App() {
   // destination : 드래그 끝나는 시점의 도착지 정보
   // source : 드래그 시작 정보 - 움직임을 시작한 아이템의 index, droppableId를 알려줌
   const onDragEnd = (info: DropResult) => {
-    console.log(info);
     const { destination, draggableId, source } = info;
     // destination이 정의되지 않았을 경우 그대로 리턴
     if (!destination) return;
@@ -49,12 +48,13 @@ function App() {
       setToDos((allBoards) => {
         // source의 droppableId로부터 array를 복사하는 과정
         const boardCopy = [...allBoards[source.droppableId]]; // toDo or Doing or Done의 array를 복사한다.
+        const taskObj = boardCopy[source.index]; // toDo object를 받아서
         // 1. source.index에서 아이템을 삭제한다.
         boardCopy.splice(source.index, 1); // source.index 즉 시작시점부터 1개만 지움
         // 2. item을 다시 destination.index에 넣고, 아무것도 추가하지 않고 item을 넣는다.
         // (item은 draggabledId 이다.)
         // (때때로 destination이 없을 수도 있다. 유저가 그자리에 그대로 둘 경우엔)
-        boardCopy.splice(destination?.index, 0, draggableId);
+        boardCopy.splice(destination?.index, 0, taskObj); // toDo object (taskObj)를 다시 넣어준다.
         // boardCopy와, 이전의 State와, 다른 Boards를 모두 리턴해주어야 함
         // oldToDos는 object 였다.
         // oldToDos에서 모든걸 리턴할건데, 보드 딱 하나만 다른걸로 대체
@@ -70,13 +70,14 @@ function App() {
         // 1. Source board의 복사본을 만든다. - 시작지점
         // (모든 보드를 가져와서 거기에서 source.droppableId를 복사)
         const sourceBoard = [...allBoards[source.droppableId]];
+        const taskObj = sourceBoard[source.index];
         // 2. destinationBoard 선언 - 끝나는 지점
         const destinationBoard = [...allBoards[destination.droppableId]];
         // 3. sourceboard 삭제하기
         sourceBoard.splice(source.index, 1);
         // 4. 삭제한걸 destination board에 넣어줌
         // (draggableId를 움직임이 끝나는 board의 index에 넣어줌)
-        destinationBoard.splice(destination?.index, 0, draggableId);
+        destinationBoard.splice(destination?.index, 0, taskObj);
         return {
           ...allBoards,
           [source.droppableId]: sourceBoard,

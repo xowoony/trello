@@ -1,10 +1,9 @@
 import { atom } from "recoil";
 
 export interface ITodo {
-  id:number;
+  id: number;
   text: string;
 }
-
 
 // interface를 하나 만든다
 interface IToDoState {
@@ -17,9 +16,12 @@ export const toDoState = atom<IToDoState>({
   // default를 기존의 배열에서 -> object로 변경해준다.
   default: {
     // 이 to_do는 배열을 가진다.
-    "진행 예정": [],
+    "진행 예정": [
+      { id: 1, text: "hello" },
+      { id: 2, text: "hello" },
+    ],
     "진행 중": [],
-    "완료": [],
+    완료: [],
   },
 });
 
