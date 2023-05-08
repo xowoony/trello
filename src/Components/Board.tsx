@@ -80,7 +80,7 @@ function Board({ toDos, boardId }: IBoardProps) {
     setToDos((allBoards) => {
       return {
         ...allBoards,
-        [boardId]: [newToDo, ...allBoards[boardId] ],
+        [boardId]: [newToDo, ...allBoards[boardId]],
       };
     }); // 현재 내가 있는 보드에만 올려주어야 함.
     // toDo를 Done 보드에 넣고 싶다고 했을 때
@@ -91,6 +91,7 @@ function Board({ toDos, boardId }: IBoardProps) {
   };
 
   return (
+    
     <Wrapper>
       <Title>{boardId}</Title>
       <Form onSubmit={handleSubmit(onValid)}>
