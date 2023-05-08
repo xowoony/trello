@@ -13,6 +13,10 @@ const Card = styled.div<{ isDragging: boolean }>`
     props.isDragging ? "0px 2px 5px rgba(0,0,0,0.5)" : "none"};
 `;
 
+const Text = styled.div`
+  color: black;
+`;
+
 interface IDragabbleCardProps {
   toDoId: number;
   toDoText: string;
@@ -29,7 +33,7 @@ function DragabbleCard({ toDoId, toDoText, index }: IDragabbleCardProps) {
           {...magic.draggableProps}
           {...magic.dragHandleProps}
         >
-          {toDoText}
+          <Text>{toDoText}</Text>
         </Card>
       )}
     </Draggable>

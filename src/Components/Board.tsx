@@ -7,6 +7,7 @@ import { useSetRecoilState } from "recoil";
 
 // 보드
 const Wrapper = styled.div`
+  margin-bottom: 5rem;
   width: 300px;
   padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
@@ -25,6 +26,7 @@ const Title = styled.h2`
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 16px;
+  color: ${(props) => props.theme.textColor};
 `;
 
 // drop 이 허락되는 영역

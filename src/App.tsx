@@ -36,6 +36,15 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
+
+html{
+  width: 100wh;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background:${(props) => props.theme.bgColor} fixed;
+  background-repeat: no-repeat;
+  color:black;
+}
 body {
   line-height: 1;
   font-weight: 600;
@@ -61,10 +70,7 @@ table {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
-  color:black;
-  
+
 }
 
 select{
@@ -98,14 +104,25 @@ const ThemeButton = styled.div`
   cursor: pointer;
 `;
 
+const Title = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
+  color: ${(props) => props.theme.titleColor};
+  font-family: "Caveat", cursive;
+`;
+
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  width: 100%;
   margin: 0 auto;
   max-width: 680px;
-  width: 100%;
 `;
 
 // 보드 전체 컨테이너
@@ -115,7 +132,7 @@ const Boards = styled.div`
   width: 100%;
   gap: 10px;
 
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -192,9 +209,14 @@ function App() {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
       <DragDropContext onDragEnd={onDragEnd}>
+        {/* 테마 변경 버튼 */}
         <ThemeContainer>
-          <ThemeButton onClick={toggleDarkAtom}>테마변경</ThemeButton>
+          <ThemeButton onClick={toggleDarkAtom}>
+            {isDark ? "🌝" : "🌚"}
+          </ThemeButton>
         </ThemeContainer>
+        {/* 보드  */}
+        <Title>Trello</Title>
         <Wrapper>
           {/* Object.keys(toDos) 까지 하면 board의 모든 Id를 받아왔음. */}
           {/* 그럼 그 boardId로 map을 이용해 새로운 board들을 만들어준다. */}
