@@ -91,7 +91,6 @@ function Board({ toDos, boardId }: IBoardProps) {
   };
 
   return (
-    
     <Wrapper>
       <Title>{boardId}</Title>
       <Form onSubmit={handleSubmit(onValid)}>
