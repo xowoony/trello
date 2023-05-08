@@ -19,7 +19,7 @@ export const toDoState = atom<IToDoState>({
   default: {
     "진행 예정": [],
     "진행 중": [],
-    완료: [],
+    "완료": [],
   },
   effects_UNSTABLE: [persistAtom],
 });

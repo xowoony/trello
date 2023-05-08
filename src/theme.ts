@@ -9,6 +9,7 @@ export const darkTheme: DefaultTheme = {
   cardColor: "#ffffffb3",
   textColor: "rgb(0,0,0)",
   titleColor: "#d5c7fdba",
+  borderStyle:"0.0625rem solid #211053",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -17,4 +18,5 @@ export const lightTheme: DefaultTheme = {
   cardColor: "#ffffffb3",
   textColor: "rgb(0,0,0)",
   titleColor: "rgb(0,0,0)",
+  borderStyle:"none",
 };

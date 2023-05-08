@@ -99,6 +99,7 @@ const ThemeContainer = styled.div`
 const ThemeButton = styled.div`
   color: ${(props) => props.theme.textColor};
   position: fixed;
+  font-size: 2rem;
   margin-right: 3rem;
   margin-top: 1rem;
   cursor: pointer;
@@ -203,6 +204,8 @@ function App() {
         };
       });
     }
+
+
   };
 
   return (

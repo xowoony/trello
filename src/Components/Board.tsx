@@ -49,6 +49,11 @@ const Form = styled.form`
   input {
     width: 100%;
     text-align: center;
+    background-color: #ffffffc4;
+    border: ${(props) => props.theme.borderStyle};
+    color: #211053;
+    width: 100%;
+    height: 2.5rem;
   }
 `;
 
@@ -66,9 +71,34 @@ interface IForm {
   toDo: string;
 }
 
+
+// 이상하면 지우기
+const Trash = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: -3.75rem;
+	left: calc(50vw - 3.75rem);
+	width: 7.5rem;
+	height: 3.75rem;
+	border-radius: 0 0 100rem 100rem;
+	background-color: tomato;
+	box-shadow: -0.1rem 0 0.4rem rgb(210 77 77 / 15%);
+	font-size: 2.5rem;
+	z-index: 5;
+	transition: transform 0.3s;
+
+	& > div {
+		margin-bottom: 0.5rem;
+		color: rgba(0, 0, 0, 0.5);
+	}
+`;
+
 // boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
 // 이렇게 하면 재사용할 수 있는 board 컴포넌트가 생겼다.
 function Board({ toDos, boardId }: IBoardProps) {
+  
   // state를 조작할 수 있는 함수
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();

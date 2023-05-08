@@ -1,12 +1,15 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { toDoState } from "../atoms";
 
 // 각각의 toDo들
 const Card = styled.div<{ isDragging: boolean }>`
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 10px;
+  font-size: 12px;
   background-color: ${(props) =>
     props.isDragging ? "#a29bfe" : props.theme.cardColor};
   box-shadow: ${(props) =>
@@ -15,6 +18,21 @@ const Card = styled.div<{ isDragging: boolean }>`
 
 const Text = styled.div`
   color: black;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const DeleteButton = styled.button`
+  margin-left: auto;
+  background-color: transparent;
+  border: 0.0625rem solid gray;
+  border-radius: 0.2rem;
+  height: 1.2rem;
+  width: 1.4rem;
+  font-size: 0.8rem;
+  text-align: center;
 `;
 
 interface IDragabbleCardProps {
@@ -23,7 +41,18 @@ interface IDragabbleCardProps {
   index: number;
 }
 
-function DragabbleCard({ toDoId, toDoText, index }: IDragabbleCardProps) {
+function DragabbleCard({ toDoText, index, toDoId }: IDragabbleCardProps) {
+  // 삭제 버튼 로직
+  const [todoState, setTodoState] = useRecoilState(toDoState);
+
+  const onDeleteClick = () => {
+    setTodoState((allBoards) => {
+      const copy = {...allBoards};
+      console.log(copy.key);
+      return { ...copy };
+    });
+  };
+
   return (
     <Draggable draggableId={toDoId + ""} index={index}>
       {(magic, snapshot) => (
@@ -33,7 +62,10 @@ function DragabbleCard({ toDoId, toDoText, index }: IDragabbleCardProps) {
           {...magic.draggableProps}
           {...magic.dragHandleProps}
         >
-          <Text>{toDoText}</Text>
+          <Text>
+            <span>{toDoText}</span>
+            <DeleteButton onClick={onDeleteClick}>X</DeleteButton>
+          </Text>
         </Card>
       )}
     </Draggable>
