@@ -15,9 +15,6 @@ const Wrapper = styled.div`
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  /* @media screen and (max-width: 1090px) {
-    width: 20rem;
-  } */
 `;
 
 // TODO, Doing, Done 타이틀
@@ -72,42 +69,17 @@ interface IForm {
 }
 
 
-// 이상하면 지우기
-const Trash = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
-	top: -3.75rem;
-	left: calc(50vw - 3.75rem);
-	width: 7.5rem;
-	height: 3.75rem;
-	border-radius: 0 0 100rem 100rem;
-	background-color: tomato;
-	box-shadow: -0.1rem 0 0.4rem rgb(210 77 77 / 15%);
-	font-size: 2.5rem;
-	z-index: 5;
-	transition: transform 0.3s;
-
-	& > div {
-		margin-bottom: 0.5rem;
-		color: rgba(0, 0, 0, 0.5);
-	}
-`;
-
-// boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
-// 이렇게 하면 재사용할 수 있는 board 컴포넌트가 생겼다.
 function Board({ toDos, boardId }: IBoardProps) {
   // Board 삭제 로직
-  const [todoState, setTodoState] = useRecoilState(toDoState);
-  const onDeleteClick = () => {
-    setTodoState((allBoards) => {
-      const copy = {...allBoards};
-      delete copy[boardId];
-      const result = copy;
-      return result;
-    });
-  };
+  // const [todoState, setTodoState] = useRecoilState(toDoState);
+  // const onDeleteClick = () => {
+  //   setTodoState((allBoards) => {
+  //     const copy = {...allBoards};
+  //     delete copy[boardId];
+  //     const result = copy;
+  //     return result;
+  //   });
+  // };
   
   // state를 조작할 수 있는 함수
   const setToDos = useSetRecoilState(toDoState);
@@ -124,18 +96,15 @@ function Board({ toDos, boardId }: IBoardProps) {
         ...allBoards,
         [boardId]: [newToDo, ...allBoards[boardId]],
       };
-    }); // 현재 내가 있는 보드에만 올려주어야 함.
-    // toDo를 Done 보드에 넣고 싶다고 했을 때
-    // Done을 제외한 나머지는 제자리에 그대로 두고
-    // Done안에도 그대로 두고 내 값만 마지막에 붙여주어야 함.
-    // 그럴려면 현재 보드를 사용해서 카피하고 그걸 다시 state에 넣어야 함.
+    });
     setValue("toDo", "");
   };
 
   return (
     <Wrapper>
       <Title>{boardId}</Title>
-      <button onClick={onDeleteClick}>X</button>
+      {/* 보드삭제 */}
+      {/* <button onClick={onDeleteClick}>X</button> */}
       <Form onSubmit={handleSubmit(onValid)}>
         
         <input
@@ -146,8 +115,7 @@ function Board({ toDos, boardId }: IBoardProps) {
       </Form>
       <Droppable droppableId={boardId}>
         {(magic, info) => (
-          // 앞으로 3가지 보드를 만들 것이다.
-          // 우리가 드롭할 때 받는 역할을 하는 건 div 뿐임
+          // 3개의 보드 생성
           <Area
             isDraggingOver={info.isDraggingOver}
             isDraggingFromThis={Boolean(info.draggingFromThisWith)}
