@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/trello/static/js/main.148ddaf1.js",
+    "main.js": "/trello/static/js/main.fc4fdf47.js",
     "index.html": "/trello/index.html",
-    "main.148ddaf1.js.map": "/trello/static/js/main.148ddaf1.js.map"
+    "main.fc4fdf47.js.map": "/trello/static/js/main.fc4fdf47.js.map"
   },
   "entrypoints": [
-    "static/js/main.148ddaf1.js"
+    "static/js/main.fc4fdf47.js"
   ]
 }
