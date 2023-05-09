@@ -1,7 +1,6 @@
 # TRELLO
 
 <h4>:purple_heart:  a project under development..  :purple_heart:</h4>
-<br>
 https://xowoony.github.io/trello/
 <br>
 <h2>Technologies Used</h2>
