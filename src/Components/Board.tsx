@@ -3,7 +3,7 @@ import DragabbleCard from "./DragabbleCard";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { ITodo, toDoState } from "../atoms";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 // 보드
 const Wrapper = styled.div`
@@ -68,7 +68,6 @@ interface IForm {
   toDo: string;
 }
 
-
 function Board({ toDos, boardId }: IBoardProps) {
   // Board 삭제 로직
   // const [todoState, setTodoState] = useRecoilState(toDoState);
@@ -80,7 +79,7 @@ function Board({ toDos, boardId }: IBoardProps) {
   //     return result;
   //   });
   // };
-  
+
   // state를 조작할 수 있는 함수
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
@@ -106,7 +105,6 @@ function Board({ toDos, boardId }: IBoardProps) {
       {/* 보드삭제 */}
       {/* <button onClick={onDeleteClick}>X</button> */}
       <Form onSubmit={handleSubmit(onValid)}>
-        
         <input
           {...register("toDo", { required: true })}
           type="text"
@@ -122,15 +120,21 @@ function Board({ toDos, boardId }: IBoardProps) {
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
-            {toDos.map((toDo, index) => (
-              <DragabbleCard
-                key={toDo.id}
-                toDoId={toDo.id}
-                index={index}
-                toDoText={toDo.text}
-                boardId={boardId}
-              />
-            ))}
+            {toDos &&
+              toDos.map(
+                (
+                  toDo,
+                  index // map 오류 해결해야 함
+                ) => (
+                  <DragabbleCard
+                    key={toDo.id}
+                    index={index}
+                    toDoId={toDo.id}
+                    toDoText={toDo.text}
+                    boardId={boardId}
+                  />
+                )
+              )}
             {magic.placeholder}
           </Area>
         )}
