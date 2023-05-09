@@ -3,7 +3,7 @@ import DragabbleCard from "./DragabbleCard";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { ITodo, toDoState } from "../atoms";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 // 보드
 const Wrapper = styled.div`
@@ -98,6 +98,16 @@ const Trash = styled.div`
 // boardId를 넘겨주고 밑에서 DroppableId로 boardId를 주도록 한다.
 // 이렇게 하면 재사용할 수 있는 board 컴포넌트가 생겼다.
 function Board({ toDos, boardId }: IBoardProps) {
+  // Board 삭제 로직
+  const [todoState, setTodoState] = useRecoilState(toDoState);
+  const onDeleteClick = () => {
+    setTodoState((allBoards) => {
+      const copy = {...allBoards};
+      delete copy[boardId];
+      const result = copy;
+      return result;
+    });
+  };
   
   // state를 조작할 수 있는 함수
   const setToDos = useSetRecoilState(toDoState);
@@ -125,7 +135,9 @@ function Board({ toDos, boardId }: IBoardProps) {
   return (
     <Wrapper>
       <Title>{boardId}</Title>
+      <button onClick={onDeleteClick}>X</button>
       <Form onSubmit={handleSubmit(onValid)}>
+        
         <input
           {...register("toDo", { required: true })}
           type="text"
@@ -148,6 +160,7 @@ function Board({ toDos, boardId }: IBoardProps) {
                 toDoId={toDo.id}
                 index={index}
                 toDoText={toDo.text}
+                boardId={boardId}
               />
             ))}
             {magic.placeholder}

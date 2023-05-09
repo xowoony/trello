@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -39,19 +39,25 @@ interface IDragabbleCardProps {
   toDoId: number;
   toDoText: string;
   index: number;
+  boardId: string;
 }
 
-function DragabbleCard({ toDoText, index, toDoId }: IDragabbleCardProps) {
-  // 삭제 버튼 로직
-  const [todoState, setTodoState] = useRecoilState(toDoState);
-
-  const onDeleteClick = () => {
-    setTodoState((allBoards) => {
-      const copy = {...allBoards};
-      console.log(copy.key);
-      return { ...copy };
+function DragabbleCard({
+  index,
+  boardId,
+  toDoText,
+  toDoId,
+}: IDragabbleCardProps) {
+  // 카드 삭제 로직
+  const setTodos = useSetRecoilState(toDoState);
+  const handleDeleteTodo = useCallback(() => {
+    setTodos((prev) => {
+      const copiedTodos = [...prev[boardId]];
+      const filteredTodos = copiedTodos.filter((todo) => todo.id !== toDoId);
+      const result = { ...prev, [boardId]: filteredTodos };
+      return result;
     });
-  };
+  }, [boardId, toDoId, setTodos]);
 
   return (
     <Draggable draggableId={toDoId + ""} index={index}>
@@ -64,7 +70,7 @@ function DragabbleCard({ toDoText, index, toDoId }: IDragabbleCardProps) {
         >
           <Text>
             <span>{toDoText}</span>
-            <DeleteButton onClick={onDeleteClick}>X</DeleteButton>
+            <DeleteButton onClick={handleDeleteTodo}>X</DeleteButton>
           </Text>
         </Card>
       )}

@@ -1,9 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
-import { ThemeProvider } from "styled-components";
 import App from "./App";
-import { darkTheme } from "./theme";
-import { createGlobalStyle } from "styled-components";
 import {QueryClient, QueryClientProvider} from "react-query";
 
 
