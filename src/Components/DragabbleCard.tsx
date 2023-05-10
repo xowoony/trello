@@ -25,6 +25,10 @@ const Text = styled.div`
 `;
 
 const DeleteButton = styled.button`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin-left: auto;
   background-color: transparent;
   border: 0.0625rem solid gray;
@@ -32,6 +36,8 @@ const DeleteButton = styled.button`
   height: 1.2rem;
   width: 1.4rem;
   font-size: 0.8rem;
+  text-align: center;
+  color: black;
   text-align: center;
 `;
 

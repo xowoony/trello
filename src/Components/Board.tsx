@@ -15,6 +15,9 @@ const Wrapper = styled.div`
   min-height: 300px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1090px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 // TODO, Doing, Done 타이틀
@@ -51,6 +54,9 @@ const Form = styled.form`
     color: #211053;
     width: 100%;
     height: 2.5rem;
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
@@ -109,6 +115,7 @@ function Board({ toDos, boardId }: IBoardProps) {
           {...register("toDo", { required: true })}
           type="text"
           placeholder={`메모를 입력하세요`}
+          autoComplete="off"
         />
       </Form>
       <Droppable droppableId={boardId}>

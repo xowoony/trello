@@ -115,6 +115,10 @@ const Title = styled.div`
   margin-top: 5rem;
   color: ${(props) => props.theme.titleColor};
   font-family: "Caveat", cursive;
+  @media screen and (max-width: 1090px) {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -143,6 +147,7 @@ const Boards = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 5rem;
   }
 `;
 
